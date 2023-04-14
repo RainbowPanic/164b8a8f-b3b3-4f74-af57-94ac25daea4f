@@ -6,7 +6,7 @@ export const  StickyDateHeader = (props: SDHProps) => {
 
     return (
         <div>
-            <p><h1>{props.showDate}</h1></p>
+            <p><h2>{props.showDate}</h2></p>
         </div>
     );
 }

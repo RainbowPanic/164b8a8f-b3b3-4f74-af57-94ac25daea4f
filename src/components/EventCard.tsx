@@ -76,7 +76,7 @@ export const  EventCard = (props: EventCardProps) => {
     return (
 
         <div >
-        <Box className={classes.stickyHeader} sx={{backgroundColor: 'primary.main', opacity: [0.7, 0.7, 0.7],}}>
+        <Box className={classes.stickyHeader} sx={{backgroundColor: 'primary.main', opacity: [0.6, 0.7, 0.7],}}>
             {props.showStickyHeader && <StickyDateHeader showDate={formattedDate} />}
         </Box>
         <Card>

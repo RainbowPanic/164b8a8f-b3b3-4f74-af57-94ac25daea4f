@@ -35,7 +35,7 @@ export const EventCollection = () => {
                         <Grid item xs={2} sm={4} md={4}><EventCard event={eventdata} showStickyHeader={true}/></Grid>
                     ))}
                 </Grid>
-        </Box>
+            </Box>
         </div>
 
     )
