@@ -76,7 +76,7 @@ export const  EventCard = (props: EventCardProps) => {
     return (
 
         <div >
-        <Box className={classes.stickyHeader} sx={{backgroundColor: 'primary.main', opacity: [0.9, 0.8, 0.7],}}>
+        <Box className={classes.stickyHeader} sx={{backgroundColor: 'primary.main', opacity: [0.7, 0.7, 0.7],}}>
             {props.showStickyHeader && <StickyDateHeader showDate={formattedDate} />}
         </Box>
         <Card>
@@ -102,9 +102,8 @@ export const  EventCard = (props: EventCardProps) => {
                 alt="Event Flyer"
             />
             <CardContent >
-                <Typography variant="body2" color="text.secondary" onClick={() => handleLocationClick(props.event.venue.direction)}>
+                <Typography variant="h6" color="text.secondary"  onClick={() => handleLocationClick(props.event.venue.direction)}>
                     {"Location: "+ props.event.city}<br /><br />
-                    {"Starts: "+ formattedDate}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
