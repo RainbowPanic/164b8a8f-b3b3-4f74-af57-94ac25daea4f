@@ -15,11 +15,15 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box'
+import {StickyDateHeader} from "./StickyDateHeader";
+
 type EventCardProps = {
     event: any
+    showStickyHeader: boolean
 }
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -47,6 +51,10 @@ const useStyles = makeStyles({
         height: 0,
         paddingTop: '56.25%',
     },
+    stickyHeader: {
+        position: 'sticky',
+        top: 0,
+    },
 });
 export const  EventCard = (props: EventCardProps) => {
     console.log(props.event.venue.direction)
@@ -64,7 +72,13 @@ export const  EventCard = (props: EventCardProps) => {
         window.open(location, '_blank');
     };
 
+
     return (
+
+        <div >
+        <Box className={classes.stickyHeader} style={{ backgroundColor: 'rgba(200, 200, 200, 1)', opacity: 80 }}>
+            {props.showStickyHeader && <StickyDateHeader showDate={formattedDate} />}
+        </Box>
         <Card>
             <CardHeader
                 avatar={
@@ -77,8 +91,9 @@ export const  EventCard = (props: EventCardProps) => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={props.event.title}
-
+                title={<Typography variant="h6">
+                        {props.event.title}
+                        </Typography>}
             />
             <CardMedia
                 component="img"
@@ -113,7 +128,7 @@ export const  EventCard = (props: EventCardProps) => {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent >
-                    <Typography variant="h5">Description:</Typography>
+                    <Typography variant="h6">Description:</Typography>
                     <Typography paragraph>
                         {props.event.pick ? props.event.pick.blurb : "None"}
                     </Typography>
@@ -126,6 +141,7 @@ export const  EventCard = (props: EventCardProps) => {
                 </CardContent>
             </Collapse>
         </Card>
+        </div>
     );
 }
 
