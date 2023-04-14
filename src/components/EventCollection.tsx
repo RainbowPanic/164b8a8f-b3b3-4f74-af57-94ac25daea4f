@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import {EventCard} from "./EventCard";
 import Grid from '@mui/material/Grid';
-
+import Box from '@mui/material/Box'
 export const EventCollection = () => {
+
     const [events, setEvents] = useState<any[]>([])
     const [error, setError] = useState([])
     //const [error, setError] = useState([])
@@ -17,28 +18,17 @@ export const EventCollection = () => {
         fetch('https://teclead-ventures.github.io/data/london-events.json')
     ];*/
 
-
+// maybe noch Box um alles um selben Astand zu gewährleisten
     return (
         <div>
-
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        {events.slice(0,3).map((eventdata) => (
-                        <EventCard event={eventdata} />
-                        ))}
-                    </Grid>
-                    <Grid item xs={4}>
-                        {events.slice(3,6).map((eventdata) => (
-                            <EventCard event={eventdata} />
-                        ))}
-                    </Grid>
-                    <Grid item xs={4}>
-                        {events.slice(6,9).map((eventdata) => (
-                            <EventCard event={eventdata} />
-                        ))}
-                    </Grid>
+            <Box
+            textAlign="center" display="flex" justifyContent="center" my={10}>
+                <Grid container justifyContent="space-evenly" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    {events.sort((a, b) => Date.parse(a.date) - Date.parse(b.date)).map((eventdata) => (
+                        <Grid item xs={2} sm={4} md={4}><EventCard event={eventdata} /></Grid>
+                    ))}
                 </Grid>
-
+        </Box>
         </div>
 
     )
