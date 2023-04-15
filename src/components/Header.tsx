@@ -10,11 +10,15 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useNavigate}  from 'react-router-dom'
+
 export const Header = () => {
     const navigate = useNavigate()
 
     const handleNav = () => {
         navigate('/ShoppingCart');
+    };
+    const handleNavHome = () => {
+        navigate('/');
     };
 
 
@@ -39,7 +43,8 @@ export const Header = () => {
 		default font weights and sizes */}
 
                 <Typography variant="h6"
-                            component="div" sx={{ flexGrow: 1 }}>
+                            component="div" sx={{ flexGrow: 1 }}
+                            onClick={handleNavHome}>
                     Events App
                 </Typography>
                 <ShoppingCartIcon onClick={handleNav}/>

@@ -8,17 +8,20 @@ import {ShoppingCart} from "./components/ShoppingCart";
 import Box from '@mui/material/Box'
 
 function App() {
+    const [clickedEvents, setClickedEvents] = useState<any[]>([]);
 
+    const handleAddClickedEvent = (clickedEvent:any) => {
+        console.log("Adding event: ", clickedEvent +"(IN APP COMPONENT)");
+        setClickedEvents(prevClickedEvents => [...prevClickedEvents, clickedEvent]);
+    };
 
   return (
     <div className="App">
-
-
         <Router>
             <Header />
             <Routes>
-                <Route path='/' element={<EventCollection />} />
-                <Route path='ShoppingCart' element={<ShoppingCart addedEvents={""} />} />
+                <Route path='/' element={<EventCollection addClickedEvent={handleAddClickedEvent}/>} />
+                <Route path='ShoppingCart' element={<ShoppingCart addedEvents={clickedEvents} />} />
             </Routes>
         </Router>
     </div>
