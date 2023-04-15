@@ -5,6 +5,7 @@ import Box from '@mui/material/Box'
 import { makeStyles } from '@material-ui/core/styles';
 import {StickyDateHeader} from "./StickyDateHeader";
 import * as React from "react";
+import {EventInterface} from '../interface/EventInterface';
 
 type EventCollectionProps = {
 
@@ -22,7 +23,7 @@ export const EventCollection = (props : EventCollectionProps) => {
             .catch(err => setError(err))
     }, [])
 
-    
+
     const eventsByDate: { [key: string]: any} = events.reduce((acc, event) => {
         // Get the date of the event as a string in yyyy-mm-dd format
         const dateStr = event.date.split("T")[0];

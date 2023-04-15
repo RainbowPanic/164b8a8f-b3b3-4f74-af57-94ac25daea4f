@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useNavigate}  from 'react-router-dom'
+import SearchIcon from '@mui/icons-material/Search';
 
 export const Header = () => {
     const navigate = useNavigate()
@@ -39,6 +40,10 @@ export const Header = () => {
 			Icon wrapped in Icon */}
                     <MenuIcon />
                 </IconButton>
+
+                <IconButton color="inherit"
+                            aria-label="menu"><SearchIcon /></IconButton>
+
                 {/* The Typography component applies
 		default font weights and sizes */}
 
@@ -47,10 +52,16 @@ export const Header = () => {
                             onClick={handleNavHome}>
                     Events App
                 </Typography>
-                <ShoppingCartIcon onClick={handleNav}/>
+                <IconButton color="inherit"
+                            aria-label="menu">
+                    <ShoppingCartIcon onClick={handleNav}/>
+                </IconButton>
                 <Button color="inherit">Login</Button>
             </Toolbar>
         </AppBar>
         </div>
     );
+
+
+
 }
