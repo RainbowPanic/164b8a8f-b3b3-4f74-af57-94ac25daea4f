@@ -17,3 +17,5 @@ In der App werden die gesamten Events in 3 Spalten aufgelistet.
 Diese sind alle nach dem Datum sortiert und der Reihe nach angezeigt.
 
 Klickt man auf die Location wird ein neuer Tab mit dem dazugehörigen Standort in Google Maps geöffnet.
+
+Wird von einem Event der Pfeil untenlinks geklickt öffnet sich die Beschreibung und eine Liste von den Artists wenn vorhanden.
