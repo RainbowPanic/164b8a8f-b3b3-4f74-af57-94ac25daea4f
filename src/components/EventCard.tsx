@@ -20,6 +20,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box'
 import {StickyDateHeader} from "./StickyDateHeader";
+import {useNavigate}  from 'react-router-dom'
 
 type EventCardProps = {
     event: any
@@ -57,7 +58,6 @@ const useStyles = makeStyles({
     },
 });
 export const  EventCard = (props: EventCardProps) => {
-    console.log(props.event.venue.direction)
     const [expanded, setExpanded] = React.useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -67,6 +67,7 @@ export const  EventCard = (props: EventCardProps) => {
 
     const dateObj = new Date(props.event.date)
     const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
 
     const handleLocationClick = (location: string) => {
         window.open(location, '_blank');
@@ -113,7 +114,7 @@ export const  EventCard = (props: EventCardProps) => {
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>
-                <IconButton aria-label="share">
+                <IconButton aria-label="add">
                     <AddCircleIcon />
                 </IconButton>
                 <ExpandMore
@@ -143,5 +144,7 @@ export const  EventCard = (props: EventCardProps) => {
         </div>
     );
 }
+
+
 
 export default EventCard

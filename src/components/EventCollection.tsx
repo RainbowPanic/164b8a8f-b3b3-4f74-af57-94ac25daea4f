@@ -3,11 +3,17 @@ import {EventCard} from "./EventCard";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box'
 import { makeStyles } from '@material-ui/core/styles';
+import {StickyDateHeader} from "./StickyDateHeader";
+import * as React from "react";
+
+type Event = {
+    title: string;
+    description: string;
+    date: string;
+    image: string;
+};
 export const EventCollection = () => {
-    interface EventInterdace {
-        date: Date;
-        // other properties
-    }
+
     const [events, setEvents] = useState<any[]>([])
     const [error, setError] = useState([])
 
@@ -18,13 +24,21 @@ export const EventCollection = () => {
             .catch(err => setError(err))
     }, [])
 
-    const lastDate = events.reduce((acc, event) => {
-        if (!acc || Date.parse(event.date) < acc) {
-            return Date.parse(event.date);
-        }
-        return acc;
-    }, null);
+    const eventsByDate: { [key: string]: any} = events.reduce((acc, event) => {
+        // Get the date of the event as a string in yyyy-mm-dd format
+        const dateStr = event.date.split("T")[0];
 
+        // If the date does not exist as a key in the accumulator object, create it and set its value to an empty array
+        if (!acc[dateStr]) {
+            acc[dateStr] = [];
+        }
+
+        // Push the event into the array for the corresponding date
+        acc[dateStr].push(event);
+
+        return acc;
+    }, {});
+    console.log(eventsByDate);
     return (
         <div>
             <h1>Events App</h1>
