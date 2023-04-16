@@ -13,7 +13,7 @@ type EventCollectionProps = {
 };
 export const EventCollection = (props : EventCollectionProps) => {
 
-    const [events, setEvents] = useState<any[]>([])
+    const [events, setEvents] = useState<EventInterface[]>([])
     const [error, setError] = useState([])
 
     useEffect(() => {
@@ -24,8 +24,9 @@ export const EventCollection = (props : EventCollectionProps) => {
     }, [])
 
 
-    const eventsByDate: { [key: string]: any} = events.reduce((acc, event) => {
-        // Get the date of the event as a string in yyyy-mm-dd format
+    const eventsByDate= events.reduce((acc:{[key:string]:EventInterface[]}, event) => {
+        console.log("Group Events by Date and sort")
+        // Get the date of the event as a string
         const dateStr = event.date.split("T")[0];
         // If the date does not exist as a key in the accumulator object, create it and set its value to an empty array
         if (!acc[dateStr]) {
@@ -35,6 +36,7 @@ export const EventCollection = (props : EventCollectionProps) => {
         acc[dateStr].push(event);
         return acc;
     }, {});
+
 
     console.log(eventsByDate);
     return (

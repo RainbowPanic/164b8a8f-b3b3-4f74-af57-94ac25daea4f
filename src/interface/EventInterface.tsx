@@ -1,4 +1,5 @@
 export interface EventInterface {
+    _id:string
     artists: Artist[]
     attending?:number
     city: string
@@ -11,6 +12,8 @@ export interface EventInterface {
     startTime?:string
     title:string
     venue: Venue;
+    __v:number
+    pick?:Pick
 }
 
 interface Venue {
@@ -25,4 +28,9 @@ interface Artist {
     id: string;
     name: string;
     _id: any; // Replace `any` with the type for `_id`, if known
+}
+
+interface Pick {
+    blurb:string
+    id:string
 }

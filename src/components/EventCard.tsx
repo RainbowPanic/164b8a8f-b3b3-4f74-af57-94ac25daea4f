@@ -23,9 +23,10 @@ import {StickyDateHeader} from "./StickyDateHeader";
 import {useNavigate}  from 'react-router-dom'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import {EventInterface} from '../interface/EventInterface';
 
 type EventCardProps = {
-    event: any
+    event:EventInterface
     showStickyHeader: boolean
     addClickedEvent (event: any) : void;
 }
