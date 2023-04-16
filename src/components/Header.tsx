@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useNavigate}  from 'react-router-dom'
+import { Container, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 export const Header = () => {
@@ -22,7 +23,11 @@ export const Header = () => {
         navigate('/');
     };
 
+    const handleChange = () => {
+        navigate('/');
+    };
 
+    const searchTerm = ""
     return (
         <div>
         <AppBar position="static">
@@ -40,13 +45,23 @@ export const Header = () => {
 			Icon wrapped in Icon */}
                     <MenuIcon />
                 </IconButton>
-
-                <IconButton color="inherit"
-                            aria-label="menu"><SearchIcon /></IconButton>
-
+                    <TextField
+                        id="search"
+                        type="search"
+                        label="Search"
+                        value={searchTerm}
+                        onChange={handleChange}
+                        sx={{ width: 300 }}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
                 {/* The Typography component applies
 		default font weights and sizes */}
-
                 <Typography variant="h6"
                             component="div" sx={{ flexGrow: 1 }}
                             onClick={handleNavHome}>
