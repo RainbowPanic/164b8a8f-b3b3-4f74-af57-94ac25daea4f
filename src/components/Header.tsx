@@ -13,7 +13,10 @@ import {useNavigate}  from 'react-router-dom'
 import { Container, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
-export const Header = () => {
+type HeaderProps = {
+    handleOnChange: (query: string) => void;
+}
+export const Header = (props: HeaderProps) => {
     const navigate = useNavigate()
 
     const handleNav = () => {
@@ -23,11 +26,17 @@ export const Header = () => {
         navigate('/');
     };
 
+    const [query, setQuery] = React.useState('');
     const handleChange = () => {
-        navigate('/');
+
+        const searchInput = document.getElementById('search') as HTMLInputElement;
+        const searchText = searchInput.value;
+
+        setQuery(searchText);
+        props.handleOnChange(searchText);
     };
 
-    const searchTerm = ""
+
     return (
         <div>
         <AppBar position="static">
@@ -49,9 +58,9 @@ export const Header = () => {
                         id="search"
                         type="search"
                         label="Search"
-                        value={searchTerm}
+                        value={query}
                         onChange={handleChange}
-                        sx={{ width: 300 }}
+                        sx={{width: 300 }}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">

@@ -6,21 +6,31 @@ import {Header} from "./components/Header";
 import {EventCollection} from "./components/EventCollection";
 import {ShoppingCart} from "./components/ShoppingCart";
 import Box from '@mui/material/Box'
-
+import {EventInterface} from './interface/EventInterface';
 function App() {
-    const [clickedEvents, setClickedEvents] = useState<any[]>([]);
-
-    const handleAddClickedEvent = (clickedEvent:any) => {
+    const [clickedEvents, setClickedEvents] = useState<EventInterface[]>([]);
+    const handleAddClickedEvent = (clickedEvent:EventInterface) => {
         console.log("Adding event: ", clickedEvent +"(IN APP COMPONENT)");
         setClickedEvents(prevClickedEvents => [...prevClickedEvents, clickedEvent]);
     };
 
-  return (
+    const [searchText, setSearchText] = useState('');
+    const handleOnChange = (searchText:string) => {
+        setSearchText(searchText);
+    };
+
+    const eventFilter = (event:EventInterface) => {
+        console.log("FILTERED EVENTS")
+        console.log(event.title.toLowerCase().includes(searchText.toLowerCase()))
+        return event.title.toLowerCase().includes(searchText.toLowerCase());
+    };
+
+    return (
     <div className="App">
         <Router>
-            <Header />
+            <Header handleOnChange={handleOnChange}/>
             <Routes>
-                <Route path='/' element={<EventCollection addClickedEvent={handleAddClickedEvent}/>} />
+                <Route path='/' element={<EventCollection addClickedEvent={handleAddClickedEvent} searchText={searchText}/>} />
                 <Route path='ShoppingCart' element={<ShoppingCart addedEvents={clickedEvents} />} />
             </Routes>
         </Router>

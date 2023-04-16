@@ -28,7 +28,7 @@ import {EventInterface} from '../interface/EventInterface';
 type EventCardProps = {
     event:EventInterface
     showStickyHeader: boolean
-    addClickedEvent (event: any) : void;
+    addClickedEvent (event: EventInterface) : void;
 }
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
