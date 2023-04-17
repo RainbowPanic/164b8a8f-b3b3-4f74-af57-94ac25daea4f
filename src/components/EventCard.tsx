@@ -15,24 +15,41 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { makeStyles } from '@material-ui/core/styles';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box'
 import {StickyDateHeader} from "./StickyDateHeader";
 import {useNavigate}  from 'react-router-dom'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import {EventInterface} from '../interface/EventInterface';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 type EventCardProps = {
-    event:EventInterface
-    showStickyHeader: boolean
-    handleClickedEvent (event: EventInterface) : void;
+    event:EventInterface // Event welches angezeigt werden soll
+    isAddEvent: boolean // bool zum anzeigen des Add oder Remove buttons
+    handleClickedEvent (event: EventInterface) : void; // Funktion zum Adden / Removen der Events
 }
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
 }
+
+const useStyles = makeStyles({
+    card: {
+        maxWidth: 400, // set your max width here
+        minheight: 200,
+        display: 'flex',
+        flexDirection: 'column',
+        margin: 'auto',
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%',
+    },
+    stickyHeader: {
+        position: 'sticky',
+        top: 0,
+    },
+});
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
     const { expand, ...other } = props;
@@ -45,28 +62,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     }),
 }));
 
-const useStyles = makeStyles({
-    card: {
-        maxWidth: 400, // set your max width here
-        display: 'flex',
-        flexDirection: 'column',
-        margin: 'auto',
-    },
-    media: {
-        height: 0,
-        paddingTop: '56.25%',
-    },
-    stickyHeader: {
-        position: 'sticky',
-        top: 63,
-    },
-});
 export const  EventCard = (props: EventCardProps) => {
     const [expanded, setExpanded] = React.useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
+    //zum Ausführen der Add / Remove Funktion
     const handleClickedEvent = () => {
         const anchor = document.querySelector('div')
         if(!anchor) {
@@ -77,17 +79,11 @@ export const  EventCard = (props: EventCardProps) => {
             }
         }
 
-
     const classes = useStyles();
-
-    const dateObj = new Date(props.event.date)
-    const formattedDate = dateObj.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-
 
     const handleLocationClick = (location: string) => {
         window.open(location, '_blank');
     };
-
 
     return (
         <div className={"Event: "+props.event._id} id={props.event._id} key={props.event._id}>
@@ -115,7 +111,8 @@ export const  EventCard = (props: EventCardProps) => {
                 />
                 <CardContent >
                     <Typography variant="h6" color="text.secondary"  onClick={() => handleLocationClick(props.event.venue.direction)}>
-                        {"Location: "+ props.event.city}<br /><br />
+                        <IconButton aria-label="share"><LocationOnIcon /></IconButton>
+                        {props.event.city}<br /><br />
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
@@ -126,7 +123,7 @@ export const  EventCard = (props: EventCardProps) => {
                         <ShareIcon />
                     </IconButton>
                     <IconButton aria-label="add">
-                        {props.showStickyHeader ? <AddCircleIcon onClick={handleClickedEvent}/> : <RemoveCircleOutlineIcon onClick={handleClickedEvent} />}
+                        {props.isAddEvent ? <AddCircleIcon onClick={handleClickedEvent}/> : <RemoveCircleOutlineIcon onClick={handleClickedEvent} />}
                     </IconButton>
                     <ExpandMore
                         expand={expanded}

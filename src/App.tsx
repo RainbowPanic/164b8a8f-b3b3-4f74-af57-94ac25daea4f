@@ -8,7 +8,10 @@ import {ShoppingCart} from "./components/ShoppingCart";
 import Box from '@mui/material/Box'
 import {EventInterface} from './interface/EventInterface';
 function App() {
+    //Ist das Event auf deses Add/Remove Button geklicked wurde
     const [clickedEvents, setClickedEvents] = useState<EventInterface[]>([]);
+
+    //fügt Events einem Aray fürs ShoppingCart hinzu
     const handleAddClickedEvent = (clickedEvent:EventInterface) => {
         console.log("Adding event: ", clickedEvent +"(IN APP COMPONENT)");
         const eventExists = clickedEvents.find((event) => event._id === clickedEvent._id);
@@ -19,6 +22,7 @@ function App() {
         setClickedEvents(prevClickedEvents => [...prevClickedEvents, clickedEvent]);
     };
 
+    //entfernt clicked Array aus dem ShoppingCart
     const handleRemoveClickedEvent = (clickedEvent: EventInterface) => {
         console.log("Removing event: ", clickedEvent +"(IN APP COMPONENT)");
         setClickedEvents(prevClickedEvents =>
@@ -26,15 +30,10 @@ function App() {
         );
     };
 
+    //inputText der Suchleiste im header zum Filtern der Events
     const [searchText, setSearchText] = useState('');
     const handleOnChange = (searchText:string) => {
         setSearchText(searchText);
-    };
-
-    const eventFilter = (event:EventInterface) => {
-        console.log("FILTERED EVENTS")
-        console.log(event.title.toLowerCase().includes(searchText.toLowerCase()))
-        return event.title.toLowerCase().includes(searchText.toLowerCase());
     };
 
     return (
@@ -43,7 +42,7 @@ function App() {
             <Header handleOnChange={handleOnChange}/>
             <Routes>
                 <Route path='/' element={<EventCollection addClickedEvent={handleAddClickedEvent} searchText={searchText}/>} />
-                <Route path='ShoppingCart' element={<ShoppingCart addedEvents={clickedEvents} removeClickedEvent={handleRemoveClickedEvent} />} />
+                <Route path='ShoppingCart' element={<ShoppingCart addedEvents={clickedEvents} removeClickedEvent={handleRemoveClickedEvent} searchText={searchText} />} />
             </Routes>
         </Router>
     </div>

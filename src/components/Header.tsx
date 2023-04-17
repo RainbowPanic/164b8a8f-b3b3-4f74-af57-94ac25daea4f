@@ -13,10 +13,18 @@ import {useNavigate}  from 'react-router-dom'
 import { Container, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
+import { makeStyles } from '@material-ui/core/styles';
 
 type HeaderProps = {
-    handleOnChange: (query: string) => void;
+    handleOnChange: (query: string) => void; // funktion zum filtern der Events
 }
+
+const useStyles = makeStyles({
+    stickyHeader: {
+        position: 'sticky',
+        zIndex: 7
+    },
+});
 export const Header = (props: HeaderProps) => {
     const navigate = useNavigate()
 
@@ -37,9 +45,10 @@ export const Header = (props: HeaderProps) => {
         props.handleOnChange(searchText);
     };
 
+    const classes = useStyles();
     return (
-        <div>
-        <AppBar position="static">
+        <div className={classes.stickyHeader}>
+        <AppBar>
             <Toolbar>
                 {/*Inside the IconButton, we
 		can render various icons*/}
