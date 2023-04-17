@@ -19,7 +19,6 @@ Verwendet man die Suchleiste oben links werden die Events nach Titel gefiltert.
 Wird von einem Event der Pfeil untenlinks geklickt öffnet sich die Beschreibung des Events und eine Liste von den Artists wenn vorhanden.
 
 
-
 ### Home Button (oben links)
 um auf die Home seite zu gelangen und die gesamten Events zu sehen
 
@@ -34,7 +33,4 @@ Dieser Button ist nur im Warenkorb verfügtbar und entfernt gewähltes Event
 
 ### Location Button
 Hier öffnet sich ein neuer Tab in Googlemaps mit em jeweiligen Standort
-
-Home
-Klickt man auf die Location wird ein neuer Tab mit dem dazugehörigen Standort in Google Maps geöffnet.
 
