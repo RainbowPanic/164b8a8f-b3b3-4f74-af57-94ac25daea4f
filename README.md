@@ -26,7 +26,8 @@ um auf die Home seite zu gelangen und die gesamten Events zu sehen
 Dort wird man zu der Warenkorbseite gelitet und findet seine hinzugefügten Events wieder
 
 ### Add Event Button (Home View)
-Fügt gewähltes Event zum ShoppingCart hinzu
+Fügt gewähltes Event zum ShoppingCart hinzu.
+Das Event kann nicht doppelt hinzugefügt werden.
 
 ### Remove Event Button (Shoppingcart View)
 Dieser Button ist nur im Warenkorb verfügtbar und entfernt gewähltes Event
