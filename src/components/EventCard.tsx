@@ -28,7 +28,7 @@ import {EventInterface} from '../interface/EventInterface';
 type EventCardProps = {
     event:EventInterface
     showStickyHeader: boolean
-    addClickedEvent (event: EventInterface) : void;
+    handleClickedEvent (event: EventInterface) : void;
 }
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -67,21 +67,17 @@ export const  EventCard = (props: EventCardProps) => {
         setExpanded(!expanded);
     };
 
-    const handleAddEvent = () => {
-        console.log("Add Event")
+    const handleClickedEvent = () => {
         const anchor = document.querySelector('div')
         if(!anchor) {
-            console.log("Error")
+            console.log("Error Add")
             return
         } else {
-            props.addClickedEvent(props.event)
-
-            const thisEvent = anchor.getElementsByClassName("Event: "+props.event._id)[0] // gets root div Element from EventCard
-            const thisEventID = () => {
-                console.log("Added Event"+thisEventID)
-            }//thisEvent.getAttribute("id") //gets id from this Event
+            props.handleClickedEvent(props.event)
+            }
         }
-    }
+
+
     const classes = useStyles();
 
     const dateObj = new Date(props.event.date)
@@ -130,7 +126,7 @@ export const  EventCard = (props: EventCardProps) => {
                         <ShareIcon />
                     </IconButton>
                     <IconButton aria-label="add">
-                        {props.showStickyHeader ? <AddCircleIcon onClick={handleAddEvent}/> : <RemoveCircleOutlineIcon onClick={handleAddEvent} />}
+                        {props.showStickyHeader ? <AddCircleIcon onClick={handleClickedEvent}/> : <RemoveCircleOutlineIcon onClick={handleClickedEvent} />}
                     </IconButton>
                     <ExpandMore
                         expand={expanded}

@@ -12,6 +12,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useNavigate}  from 'react-router-dom'
 import { Container, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+import HomeIcon from '@mui/icons-material/Home';
 
 type HeaderProps = {
     handleOnChange: (query: string) => void;
@@ -36,7 +37,6 @@ export const Header = (props: HeaderProps) => {
         props.handleOnChange(searchText);
     };
 
-
     return (
         <div>
         <AppBar position="static">
@@ -52,7 +52,7 @@ export const Header = (props: HeaderProps) => {
                 >
                     {/*This is a simple Menu
 			Icon wrapped in Icon */}
-                    <MenuIcon />
+                    <HomeIcon onClick={handleNavHome}/>
                 </IconButton>
                     <TextField
                         id="search"
@@ -71,10 +71,8 @@ export const Header = (props: HeaderProps) => {
                     />
                 {/* The Typography component applies
 		default font weights and sizes */}
-                <Typography variant="h6"
-                            component="div" sx={{ flexGrow: 1 }}
-                            onClick={handleNavHome}>
-                    Events App
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+
                 </Typography>
                 <IconButton color="inherit"
                             aria-label="menu">
@@ -85,7 +83,4 @@ export const Header = (props: HeaderProps) => {
         </AppBar>
         </div>
     );
-
-
-
 }

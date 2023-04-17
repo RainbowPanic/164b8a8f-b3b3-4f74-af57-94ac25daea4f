@@ -11,7 +11,19 @@ function App() {
     const [clickedEvents, setClickedEvents] = useState<EventInterface[]>([]);
     const handleAddClickedEvent = (clickedEvent:EventInterface) => {
         console.log("Adding event: ", clickedEvent +"(IN APP COMPONENT)");
+        const eventExists = clickedEvents.find((event) => event._id === clickedEvent._id);
+        if (eventExists) {
+            console.log("Event with id", clickedEvent._id, "already exists");
+            return;
+        }
         setClickedEvents(prevClickedEvents => [...prevClickedEvents, clickedEvent]);
+    };
+
+    const handleRemoveClickedEvent = (clickedEvent: EventInterface) => {
+        console.log("Removing event: ", clickedEvent +"(IN APP COMPONENT)");
+        setClickedEvents(prevClickedEvents =>
+            prevClickedEvents.filter(event => event !== clickedEvent)
+        );
     };
 
     const [searchText, setSearchText] = useState('');
@@ -31,7 +43,7 @@ function App() {
             <Header handleOnChange={handleOnChange}/>
             <Routes>
                 <Route path='/' element={<EventCollection addClickedEvent={handleAddClickedEvent} searchText={searchText}/>} />
-                <Route path='ShoppingCart' element={<ShoppingCart addedEvents={clickedEvents} />} />
+                <Route path='ShoppingCart' element={<ShoppingCart addedEvents={clickedEvents} removeClickedEvent={handleRemoveClickedEvent} />} />
             </Routes>
         </Router>
     </div>
